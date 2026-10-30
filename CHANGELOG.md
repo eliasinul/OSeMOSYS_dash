@@ -1,15 +1,14 @@
 # Changelog
 
-## 0.1.2 (2026-10-30)
+## 0.2.0 (2026-10-30)
 
 Date: 2026-10-30
-Files: docs/TOUR.md, docs/img/ (22 PNG), tools/make_screenshots.js, README.md, AGENTS.md, NOTICE, package.json
-What changed: interface tour with light and dark screenshots of every step, linked from the README;
-a script that regenerates the screenshots; NOTICE with third-party credits; README no longer claims
-the page needs no network (fonts come from Google Fonts when online).
-Why: new users need to see the interface before linking a folder.
-Verified by: every screenshot inspected; tour text checked against the chart headings each tab renders.
-Not verified: how the images render on GitHub (relative links checked locally only).
+Files: docs/TOUR.md, docs/img/ (22 PNG), tools/make_screenshots.js, README.md, AGENTS.md, DEBT.md, NOTICE, package.json
+What changed: added the interface tour and light/dark screenshots, a screenshot regeneration script,
+third-party credits, clarification that fonts load online when available, and agent debt-reporting guidance.
+Why: users can preview the interface before connecting a results folder.
+Verified by: version references and debt table reviewed; screenshots inspected; tour checked against chart headings.
+Not verified: automated tests (Node/npm unavailable) and GitHub rendering of the tour images.
 
 ## 0.1.1 (2026-10-30)
 

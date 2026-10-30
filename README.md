@@ -14,7 +14,7 @@ Everything specific to a study (countries, map coordinates, scenario codes,
 discount rates, technology codes, colours, plant lives, committed pipeline)
 lives in `config/`. The HTML file holds only the method.
 
-Version 0.1.2. The results shipped in `results/` are synthetic placeholders
+Version 0.2.0. The results shipped in `results/` are synthetic placeholders
 for three invented countries; they describe no real system.
 
 ## Quick start
