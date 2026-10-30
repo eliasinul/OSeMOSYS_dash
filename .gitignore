@@ -1,0 +1,14 @@
+# Office lock files and temporary files
+~$*
+*.tmp
+# Python
+__pycache__/
+*.pyc
+# Test dependencies and outputs
+node_modules/
+package-lock.json
+tests/out_*.png
+# Large inputs belong outside git; list exceptions explicitly
+data/*
+!data/README.md
+!data/SOURCE.md
