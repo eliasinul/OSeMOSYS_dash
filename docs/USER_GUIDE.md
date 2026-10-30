@@ -30,6 +30,8 @@ to a folder dialog on every read.
 
 ## 3. Read the results
 
+Screenshots of each step, in both themes: `docs/TOUR.md`.
+
 - Home: the map. A lit marker has results; a grey one is listed in
   `config/countries.md` with nothing read yet. Hover a marker for its
   profile, click it to open the country. More opens four panels: reading

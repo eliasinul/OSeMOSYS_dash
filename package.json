@@ -1,6 +1,6 @@
 {
   "name": "osemosys-dash",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "private": true,
   "description": "Tests for the OSeMOSYS Result Dash. The dashboard itself needs no installation.",
   "author": "EL",

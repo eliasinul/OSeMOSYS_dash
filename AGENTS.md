@@ -26,7 +26,7 @@ no runtime dependency.
 | `config/*.md` | single source of truth for everything study-specific | yes |
 | `results/*.txt` | model output | never by hand; replace whole files |
 | `data/` | inputs and sources, not read by the tool | yes; record provenance in `data/SOURCE.md` |
-| `docs/` | user guide, config reference, results format, methods | keep in step with the code |
+| `docs/` | interface tour and screenshots, user guide, config reference, results format, methods | keep in step with the code; regenerate screenshots after a UI change |
 | `tools/` | placeholder generator, code lister | yes |
 | `tests/` | known-answer and smoke tests | add tests; never weaken one to make it pass |
 | `archive/` | superseded files | move files here instead of deleting |
@@ -40,6 +40,7 @@ node tests/smoke.js             # loads the repository, opens every tab, both th
 node tests/refresh.js           # Refresh with a stand-in linked folder
 python tools/list_codes.py      # technology codes in results not mapped in config
 python tools/make_placeholder_results.py   # regenerate the synthetic results
+node tools/make_screenshots.js             # regenerate docs/img/ for docs/TOUR.md after a UI change
 ```
 
 The tests need Playwright with Chromium (`npm install`, then

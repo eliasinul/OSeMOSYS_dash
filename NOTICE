@@ -1,0 +1,11 @@
+OSeMOSYS Result Dash
+Copyright 2026 EL
+
+Licensed under the Apache License, Version 2.0 (see LICENSE).
+
+Third-party material:
+- The world land outline drawn on the map is derived from Natural Earth
+  1:110m land (naturalearthdata.com), which is in the public domain.
+- The page loads the IBM Plex Sans and IBM Plex Mono fonts from Google Fonts
+  at run time. They are licensed under the SIL Open Font License 1.1 and are
+  not redistributed in this repository.

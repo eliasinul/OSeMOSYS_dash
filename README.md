@@ -2,7 +2,8 @@
 
 A single-file dashboard for reading OSeMOSYS power-sector results across
 countries, scenarios and discount rates. It runs in the browser from the
-file itself: no server, no installation, no network.
+file itself: no server and no installation. Fonts load from Google Fonts
+when online; offline the page falls back to system fonts.
 
 The dashboard reads two kinds of file and nothing else:
 
@@ -13,7 +14,7 @@ Everything specific to a study (countries, map coordinates, scenario codes,
 discount rates, technology codes, colours, plant lives, committed pipeline)
 lives in `config/`. The HTML file holds only the method.
 
-Version 0.1.1. The results shipped in `results/` are synthetic placeholders
+Version 0.1.2. The results shipped in `results/` are synthetic placeholders
 for three invented countries; they describe no real system.
 
 ## Quick start
@@ -28,6 +29,17 @@ After a new model run, copy the results file into `results/` and press
 Refresh. Chrome and Edge remember the linked folder between sessions; other
 browsers ask for it each time.
 
+## Interface tour
+
+`docs/TOUR.md` walks through the interface step by step, with screenshots
+in the light and the dark theme: connecting the folder, the map and its
+hover cards, the scenario table, every tab, the annualised capital charge,
+and the reading aids and warnings.
+
+| Light | Dark |
+|---|---|
+| ![Overview, light](docs/img/04_overview_light.png) | ![Overview, dark](docs/img/04_overview_dark.png) |
+
 ## Repository layout
 
 ```
@@ -36,7 +48,7 @@ OSeMOSYS_dash/
   config/                what to read and how to label it  (read by the dash)
   results/               model results, one .txt per country and scenario  (read by the dash)
   data/                  your model inputs and sources  (never read by the dash)
-  docs/                  user guide, config reference, results format, methods
+  docs/                  interface tour (with screenshots), user guide, config reference, results format, methods
   tools/                 helper scripts (placeholder generator, code lister)
   tests/                 browser tests with known answers
   archive/               superseded files; never read
@@ -114,4 +126,4 @@ the repository through the folder input and opens every tab in both themes.
 
 ## Licence
 
-Apache License 2.0, see `LICENSE`. Copyright 2026 EL.
+Apache License 2.0, see `LICENSE` and `NOTICE`. Copyright 2026 EL.
