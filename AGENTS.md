@@ -27,7 +27,8 @@ no runtime dependency.
 | `results/*.txt` | model output | never by hand; replace whole files |
 | `data/` | inputs and sources, not read by the tool | yes; record provenance in `data/SOURCE.md` |
 | `docs/` | interface tour and screenshots, user guide, config reference, results format, methods | keep in step with the code; regenerate screenshots after a UI change |
-| `tools/` | placeholder generator, code lister | yes |
+| `docs/index.html` | published demo page, generated | never by hand; run `tools/make_demo_page.py` |
+| `tools/` | placeholder generator, code lister, demo page builder | yes |
 | `tests/` | known-answer and smoke tests | add tests; never weaken one to make it pass |
 | `archive/` | superseded files | move files here instead of deleting |
 | `LICENSE` | Apache-2.0 | never |
@@ -38,8 +39,10 @@ no runtime dependency.
 node tests/known_answers.js     # arithmetic and matching against hand-computed values
 node tests/smoke.js             # loads the repository, opens every tab, both themes
 node tests/refresh.js           # Refresh with a stand-in linked folder
+node tests/demo.js              # docs/index.html opens on the placeholders and is in step with its sources
 python tools/list_codes.py      # technology codes in results not mapped in config
 python tools/make_placeholder_results.py   # regenerate the synthetic results
+python tools/make_demo_page.py             # rebuild docs/index.html after any change to the HTML, config/ or results/
 node tools/make_screenshots.js             # regenerate docs/img/ for docs/TOUR.md after a UI change
 ```
 
@@ -65,7 +68,7 @@ The tests need Playwright with Chromium (`npm install`, then
   in `DECISIONS.md`; shortcuts in `DEBT.md`.
 - Versioning: 0.MINOR.PATCH until the first public release. A new feature
   raises MINOR, a fix raises PATCH.
-- Done means: both tests pass, the docs describe the new behaviour, the
+- Done means: `docs/index.html` is rebuilt, every test passes, the docs describe the new behaviour, the
   change note is written, and what was not verified is stated.
 
 ## Writing

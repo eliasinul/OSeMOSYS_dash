@@ -10,6 +10,11 @@ git clone https://github.com/eliasinul/OSeMOSYS_dash
 
 Nothing needs to be installed. The dashboard is `OSeMOSYS_dash.html`.
 
+To look at the tool first, open `docs/index.html` or its published copy,
+https://eliasinul.github.io/OSeMOSYS_dash/. That page opens on the synthetic
+placeholder results without asking for a folder, and says "sample" on the map
+and on every tab. Linking a folder there replaces the placeholders.
+
 ## 2. Open it and link the folder
 
 1. Open `OSeMOSYS_dash.html` in Chrome or Edge (double-click, or drag it

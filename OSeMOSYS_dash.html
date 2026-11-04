@@ -1118,11 +1118,29 @@ function tintOf(hex, t){
   return "rgb(" + a.map((c, i) => Math.round(c * t + b[i] * (1 - t))).join(",") + ")";
 }
 
-/* There is no built-in sample: the dashboard shows only what it reads. */
-function loadSample(){
+/* The dashboard carries no sample and shows only what it reads. A page built by
+   tools/make_demo_page.py carries one in a JSON tag, {note, files:[{path, text}]},
+   and reads it as a linked folder would be read. Any read from a folder replaces it. */
+async function loadSample(){
   S.C = {}; S.sel = null;
   S.selC = null; S.caseName = ""; S.years = []; S.scen = {}; S.order = [];
   S.sample = false;
+  const tag = document.getElementById("osd-sample");
+  if(!tag) return;
+  try{
+    const B = JSON.parse(tag.textContent);
+    await ingestFiles(B.files.map(f => {
+      const name = f.path.split("/").pop();
+      return {name, path:f.path, file:new File([f.text], name, {lastModified:0})};
+    }));
+    if(S.readProblem) return;
+    for(const c of Object.values(S.C)) for(const sc of Object.values(c.scen)) sc.src = "sample";
+    S.sample = true; S.sampleNote = B.note || "";
+    render();
+  }catch(e){
+    S.readProblem = "The sample inside this page could not be read: " + e.message;
+    render();
+  }
 }
 
 /* ============================ ingestion ============================ */
@@ -1855,7 +1873,7 @@ dirIn.addEventListener("change", e=>{
     })
     .finally(busyOff);
 });
-(async ()=>{
+async function restoreLink(){
   if(!HAS_FSA){ linkNote.innerHTML = STRUCT_NOTE + ' This browser cannot keep the folder between reloads; Chrome and Edge can.'; return; }
   const h = await loadRoot();
   if(!h){ linkNote.innerHTML = STRUCT_NOTE; return; }
@@ -1866,7 +1884,7 @@ dirIn.addEventListener("change", e=>{
     linkNote.textContent = `${h.name} is linked. Click Refresh to re-read it — the browser asks for permission once per session.`;
     if(S.tab === "home") render();        // queued until the opening ends, if it is still playing
   }
-})();
+}
 
 /* ============================ derivations ============================ */
 const U = () => S.unit==="TWh" ? PJ2TWh : 1;
@@ -2229,9 +2247,9 @@ function vHome(){
         : `<text x="${x+dx}" y="${y+dy}" text-anchor="${anc}">${esc(n.toUpperCase())}</text>`}
       <circle class="hit" cx="${x}" cy="${y}" r="13"></circle></g>`;
   }).join("");
-  /* Until something is read from a folder, the page asks for that first;
-     "click a country" only makes sense once there is something to open. */
-  const realData = !S.sample && loaded.length > 0 && !S.readProblem;
+  /* Until something is read, the page asks for that first; "click a country"
+     only makes sense once there is something to open. */
+  const realData = loaded.length > 0 && !S.readProblem;
   const ask = realData ? null : !HAS_FSA ? "drop" : ROOT ? "refresh" : "link";
   const loadCall = !ask ? "" : `<button class="callout loadcall" id="loadCall" type="button"
        data-act="${ask==="refresh" && !S.readProblem ? "refresh" : "link"}">
@@ -2247,7 +2265,7 @@ function vHome(){
   const hint = (S.hintOff || !realData) ? "" :
     `<div class="callout" id="mapHint">
        <span class="led" aria-hidden="true"></span>
-       <span>Click a country to explore its results.</span>
+       <span>${S.sample ? esc(S.sampleNote) + " " : ""}Click a country to explore its results.</span>
        <button class="x" id="hintX" aria-label="Dismiss">&times;</button></div>`;
   const pc = v => v.toFixed(2) + " %";
   const P = S.homePanel;
@@ -3358,7 +3376,7 @@ function render(){
      running, the counts arrive when the animation ends, and the landing view is
      never rebuilt underneath it. Any other tab renders as usual. */
   if(S.tab === "home" && INTRO_RUNNING){ HOME_RERENDER = true; return; }
-  document.getElementById("caseTag").textContent = S.caseName;
+  document.getElementById("caseTag").textContent = S.caseName + (S.sample ? " · sample" : "");
   renderRail();
   const tabs=document.getElementById("tabs");
   /* Home is the map, not a reading of the data, so it carries a mark rather
@@ -4249,7 +4267,9 @@ matchMedia("(prefers-color-scheme: dark)").addEventListener("change", paintChrom
 
 try{ const t=localStorage.getItem("osd-theme"); if(t) document.documentElement.setAttribute("data-theme",t); }catch(e){}
 
-loadSample();
+const sampleRead = loadSample();
 render();
+/* After the sample: a folder that is still linked replaces it, never the reverse. */
+sampleRead.finally(restoreLink);
 </script>
 </body></html>

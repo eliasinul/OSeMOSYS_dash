@@ -1,5 +1,15 @@
 # Changelog
 
+## 0.3.0 (2026-11-04)
+
+Date: 2026-11-04
+Files: OSeMOSYS_dash.html, docs/index.html, tools/make_demo_page.py (new), tests/demo.js (new), package.json, README.md, AGENTS.md, DECISIONS.md, DEBT.md, docs/USER_GUIDE.md, docs/TOUR.md
+What changed: docs/index.html opens on the placeholder results with no load prompt, marked "sample" on the map and on
+every tab. It is now built by tools/make_demo_page.py. A linked folder replaces the sample. OSeMOSYS_dash.html behaves as before.
+Why: visitors to the published page saw an empty map and a request for a folder they do not have.
+Verified by: tests/demo.js (12 checks), known_answers.js, smoke.js, refresh.js, in Chrome through Playwright 1.64 beta, not the pinned 1.63.0.
+Not verified: the published page (not pushed), Firefox and Safari, a real folder picker over the sample, screenshots not regenerated (OSeMOSYS_dash.html looks the same).
+
 ## 0.2.0 (2026-10-30)
 
 Date: 2026-10-30

@@ -10,8 +10,9 @@ real system. The screenshots are regenerated with
 
 ## 1. Connect the folder
 
-The page opens on an empty map. When the opening animation ends, a prompt
-points at the link button. Click it and choose the repository folder (the
+`OSeMOSYS_dash.html` opens on an empty map. (The demo page, `docs/index.html`,
+skips this step: it opens on the placeholder results, marked "sample", with no
+prompt.) When the opening animation ends, a prompt points at the link button. Click it and choose the repository folder (the
 one holding `config/`). If a read finds nothing, the same prompt says why.
 
 | Light | Dark |

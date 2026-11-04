@@ -48,3 +48,10 @@ Decision: "osemosys-dash" for IndexedDB, "osd-" for every other key.
 Alternatives rejected: a per-file key derived from the page path (breaks when the file is moved or renamed).
 Consequence: a user upgrading from 0.1.0 links the folder once more; comments cached by the CVF dash no longer appear here.
 Status: active
+
+## D008. The demo page carries the placeholder study inside it (2026-11-04)
+Context: `docs/index.html`, published on GitHub Pages, should show results on opening. Pages serves `docs/` only, so `../results` is out of reach, and a page opened from file:// cannot fetch at all.
+Decision: `tools/make_demo_page.py` builds the page from `OSeMOSYS_dash.html`, `config/` and `results/`, adding one JSON tag that `loadSample()` reads as a folder would be read. `OSeMOSYS_dash.html` carries no data, so D004 still holds for the tool itself.
+Alternatives rejected: copying `config/` and `results/` into `docs/` and fetching them (fails from file://, and leaves a second copy of each file in the tree); embedding the sample in `OSeMOSYS_dash.html` (reverses D004).
+Consequence: the page is 2.9 MB against 0.3 MB and must be rebuilt after any change to its sources; `tests/demo.js` fails until it is. The builder refuses a results file without the synthetic mark of D006, so real results cannot be published by accident. A linked folder always replaces the sample.
+Status: active
